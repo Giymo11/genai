@@ -25,7 +25,8 @@ final class Sheet private (private val service: GSheets, val sheetId: String):
     val resp   = service.spreadsheets().values().get(sheetId, range).execute()
     val values = Option(resp.getValues).getOrElse(Collections.emptyList[java.util.List[AnyRef]]())
 
-    values.asScala.toVector.map(row => row.asScala.toVector.map(v => Option(v).map(_.toString).getOrElse("")))
+    values.asScala.toVector
+      .map(row => row.asScala.toVector.map(v => Option(v).map(_.toString).getOrElse("")))
 
   private def columnIndexToLetter(index: Int): String = {
     @annotation.tailrec
@@ -48,7 +49,8 @@ object Sheet:
     val credential = GoogleCredential.fromStream(FileInputStream(credsPath))
       .createScoped(Collections.singleton(SheetsScopes.SPREADSHEETS_READONLY))
 
-    val gsvc = new GSheets.Builder(httpTransport, jsonFactory, credential).setApplicationName(ApplicationName).build()
+    val gsvc = new GSheets.Builder(httpTransport, jsonFactory, credential)
+      .setApplicationName(ApplicationName).build()
 
     new Sheet(gsvc, sheetId)
   }

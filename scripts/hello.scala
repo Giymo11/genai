@@ -23,8 +23,12 @@ def helloOllama(): Unit = {
     "stream"   -> Bool(false)
   )
   try {
-    val response = requests
-      .post(ollamaUrl, data = buildData(prompt).render(), readTimeout = 60000, connectTimeout = 5000)
+    val response = requests.post(
+      ollamaUrl,
+      data = buildData(prompt).render(),
+      readTimeout = 60000,
+      connectTimeout = 5000
+    )
     if response.statusCode == 200 then
       val json   = ujson.read(response.text())
       val answer = json("choices")(0)("message")("content").str.trim

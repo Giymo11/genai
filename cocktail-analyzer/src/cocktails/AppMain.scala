@@ -45,7 +45,8 @@ object AppMain extends App:
     println("\nAsking LLM to analyze sheet structure...")
 
     val llm      = LlmClient.fromConfig(cfg)
-    val analysis = llm.complete(system = "You are a precise data analyst for cocktail datasets.", user = snapshot)
+    val analysis = llm
+      .complete(system = "You are a precise data analyst for cocktail datasets.", user = snapshot)
 
     println("\n=== LLM Analysis ===")
     println(analysis)

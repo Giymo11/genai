@@ -54,9 +54,11 @@ object ConfigUtils:
   private val DefaultConfigPath = "config/cocktails.conf"
 
   def load(path: String = DefaultConfigPath): AppConfig = {
-    val base: Config = ConfigFactory.parseFile(new java.io.File(path)).withFallback(ConfigFactory.load())
+    val base: Config = ConfigFactory.parseFile(new java.io.File(path))
+      .withFallback(ConfigFactory.load())
 
-    def get(path: String, default: String): String = if base.hasPath(path) then base.getString(path) else default
+    def get(path: String, default: String): String =
+      if base.hasPath(path) then base.getString(path) else default
 
     val sheetId     = get("cocktails.sheet-id", "")
     val llmProvider = get("llm.provider", "ollama").toLowerCase
@@ -67,10 +69,11 @@ object ConfigUtils:
     val openRouterUrl   = get("llm.openrouter.url", "https://openrouter.ai/api/v1/chat/completions")
     val openRouterModel = get("llm.openrouter.model", "meta-llama/llama-3.1-70b-instruct")
 
-    val googleCredsPath = sys.env.getOrElse("GOOGLE_APPLICATION_CREDENTIALS", "secrets/service-account.json")
+    val googleCredsPath = sys.env
+      .getOrElse("GOOGLE_APPLICATION_CREDENTIALS", "secrets/service-account.json")
 
     val openRouterApiKeyFromFile = readFirstLineIfExists("secrets/openrouter.key")
-    val openRouterApiKey         = openRouterApiKeyFromFile.orElse(sys.env.get("OPENROUTER_API_KEY"))
+    val openRouterApiKey = openRouterApiKeyFromFile.orElse(sys.env.get("OPENROUTER_API_KEY"))
 
     AppConfig(
       sheetId = sheetId,
@@ -106,14 +109,16 @@ object SheetsUtil:
     val credential = GoogleCredential.fromStream(FileInputStream(credsPath))
       .createScoped(Collections.singleton(SheetsScopes.SPREADSHEETS_READONLY))
 
-    new Sheets.Builder(httpTransport, jsonFactory, credential).setApplicationName(ApplicationName).build()
+    new Sheets.Builder(httpTransport, jsonFactory, credential).setApplicationName(ApplicationName)
+      .build()
   }
   end buildService
 
   def readRange(service: Sheets, sheetId: String, range: String): Vector[Vector[String]] =
     val resp   = service.spreadsheets().values().get(sheetId, range).execute()
     val values = Option(resp.getValues).getOrElse(Collections.emptyList[java.util.List[AnyRef]]())
-    values.asScala.toVector.map(row => row.asScala.toVector.map(v => Option(v).map(_.toString).getOrElse("")))
+    values.asScala.toVector
+      .map(row => row.asScala.toVector.map(v => Option(v).map(_.toString).getOrElse("")))
 
   def readEntireFirstSheet(service: Sheets, sheetId: String): Vector[Vector[String]] = {
     val meta       = service.spreadsheets().get(sheetId).execute()
@@ -172,31 +177,43 @@ object LlmUtils:
     val body = ujson.Obj(
       "model"    -> cfg.ollamaModel,
       "messages" -> ujson.Arr(
-        ujson.Obj("role" -> "system", "content" -> "You are a precise data analyst for cocktail datasets."),
-        ujson.Obj("role" -> "user", "content"   -> prompt)
+        ujson.Obj(
+          "role"    -> "system",
+          "content" -> "You are a precise data analyst for cocktail datasets."
+        ),
+        ujson.Obj("role" -> "user", "content" -> prompt)
       ),
       "stream" -> false
     )
 
-    try
-      val resp = requests.post(url = cfg.ollamaUrl, data = body.render(), readTimeout = 120000, connectTimeout = 5000)
+    try {
+      val resp = requests.post(
+        url = cfg.ollamaUrl,
+        data = body.render(),
+        readTimeout = 120000,
+        connectTimeout = 5000
+      )
       if resp.statusCode == 200 then
         val json = ujson.read(resp.text())
         json("choices")(0)("message")("content").str.trim
       else s"[Error] Ollama HTTP ${resp.statusCode}: ${resp.text()}"
-    catch case e: Exception => s"[Error] Ollama request failed: ${e.getMessage}"
+    } catch case e: Exception => s"[Error] Ollama request failed: ${e.getMessage}"
   }
   end callOllama
 
   private def callOpenRouter(cfg: AppConfig, prompt: String): String = {
-    val apiKey = cfg.openRouterApiKey
-      .getOrElse(return "[Error] OpenRouter API key is not set (secrets/openrouter.key or OPENROUTER_API_KEY)")
+    val apiKey = cfg.openRouterApiKey.getOrElse(
+      return "[Error] OpenRouter API key is not set (secrets/openrouter.key or OPENROUTER_API_KEY)"
+    )
 
     val body = ujson.Obj(
       "model"    -> cfg.openRouterModel,
       "messages" -> ujson.Arr(
-        ujson.Obj("role" -> "system", "content" -> "You are a precise data analyst for cocktail datasets."),
-        ujson.Obj("role" -> "user", "content"   -> prompt)
+        ujson.Obj(
+          "role"    -> "system",
+          "content" -> "You are a precise data analyst for cocktail datasets."
+        ),
+        ujson.Obj("role" -> "user", "content" -> prompt)
       ),
       "stream" -> false
     )
