@@ -1,0 +1,15 @@
+.bsp/
+.metals/
+.scala-build/
+.vscode/
+.mill
+.DS_Store
+target/
+out/
+.idea/
+secrets/
+
+# mill executables
+*.exe
+*.bat
+mill
