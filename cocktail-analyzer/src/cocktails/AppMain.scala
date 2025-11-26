@@ -51,3 +51,17 @@ object AppMain extends App:
     println("\n=== LLM Analysis ===")
     println(analysis)
   }
+
+  // read all data, save to local CSVs
+
+  val allSheets = sheet.readAllSheets()
+
+  allSheets.foreach { case (title, rows) =>
+    val csvContent = Csv.format(rows)
+    val safeTitle  = title.replaceAll("[\\\\/:*?\"<>|]", "_")
+    val filename   = s"sheet_$safeTitle.csv"
+    val path       = os.pwd / "data" / filename
+
+    os.write.over(path, csvContent)
+    println(s"Wrote sheet '$title' to data/$filename")
+  }
