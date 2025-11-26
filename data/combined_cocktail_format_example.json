@@ -1,0 +1,88 @@
+```json
+{
+  "cocktail_specs": [
+    {
+      "name": "Paper Plane",
+      "rating": "4.2",
+      "description": "A modern classic with a fantastic balance of sweet, tart, and bitter.",
+      "family": "Sours",
+      "ice": "up",
+      "abv_estimate": 24,
+      "tasting_notes": "Bright, complex, balanced.  Citrus and almond notes.",
+      "history_notes": "Created in 2008 by Alex Day at the White Limozeen in Los Angeles.  Named for the airplane featured in the movie Up.",
+      "personal_remarks": "One of my go-to cocktails when I want something a little bit different.",
+      "ingredients": [
+        {
+          "name": "Bourbon",
+          "volume_ml": 30,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.whiskey.bourbon.standard",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "Aperol",
+          "volume_ml": 30,
+          "ingredient_type": "liqueur",
+          "ingredient_id": "liqueur.aperitivo.aperol",
+          "notes": null,
+          "substitution_suggestions": [
+            {
+              "what": "Campari",
+              "why": "More bitter.",
+              "notes": "Will significantly increase bitterness."
+            }
+          ]
+        },
+        {
+          "name": "Amaro Nonino Quintessentia",
+          "volume_ml": 30,
+          "ingredient_type": "bitter",
+          "ingredient_id": "bitter.amaro.nonino",
+          "notes": null,
+          "substitution_suggestions": [
+            {
+              "what": "Amaro Ramazzotti",
+              "why": "Similar profiles.",
+              "notes": "A slightly less complex option."
+            }
+          ]
+        },
+        {
+          "name": "Lemon Juice",
+          "volume_ml": 120,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.citrus.lemon",
+          "notes": "Freshly squeezed.",
+          "substitution_suggestions": [
+            {
+              "what": "Lime Juice",
+              "why": "Tartness.",
+              "notes": "Will alter flavor profile."
+            }
+          ]
+        }
+      ],
+      "garnish": [
+        "Lemon Twist"
+      ],
+      "instructions": "Combine all ingredients in a shaker with ice. Shake until well-chilled. Strain into a coupe glass.",
+      "instruction_id": "shake",
+      "version": null,
+      "tags": [
+        "modern classic",
+        "balanced"
+      ],
+      "metadata": {
+        "source": "Personal notes",
+        "author": "Bard",
+        "date": "2024-05-03"
+      }
+    }
+  ],
+  "metadata": {
+    "description": "Cocktail specifications",
+    "data": []
+  }
+}
+```

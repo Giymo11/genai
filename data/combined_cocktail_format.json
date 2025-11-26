@@ -1,0 +1,51 @@
+{
+  "cocktail_specs": [
+    {
+      "name": "string",
+      "rating": "string (up to 5.5 stars, or 'unrated')",
+      "description": "string (optional)",
+      "family": "string (optional, following the big cocktail families as described in Cocktail Codex, e.g., 'Sours', 'Highballs')",
+      "ice": "string (e.g. 'rocks', 'up', 'crushed', pebbled', etc.)",
+      "abv_estimate": "number (optional)",
+      "tasting_notes": "string (optional)",
+      "history_notes": "string (optional)",
+      "personal_remarks": "string (optional)",
+      "ingredients": [
+        {
+          "name": "string",
+          "volume_ml": "number, convert all to ml, one dash is 1 ml, a barspoon is 5 ml, use 23 instead of 22.5",
+          "ingredient_type": "string (optional, e.g., 'spirit', 'liqueur', 'juice', 'syrup', 'bitter', 'other')",
+          "ingredient_id": "string (optional, based on standardized format e.g. spirit.whiskey.bourbon.high_wheat)",
+          "notes": "string (optional)",
+          "substitution_suggestions": [
+            {
+              "what": "string",
+              "why": "string",
+              "notes": "string (optional)"
+            }
+          ]
+        }
+      ],
+      "garnish": [
+        "string (optional)"
+      ],
+      "instructions": "string (optional)",
+      "instruction_id": "string (optional), based on standardized format e.g. shake, stir, blend, build, etc",
+      "version": "string (optional)",
+      "tags": [
+        "string (optional)"
+      ],
+      "metadata": {
+        "source": "string (optional)",
+        "author": "string (optional)",
+        "date": "string (optional)"
+      }
+    }
+  ],
+  "metadata": {
+    "description": "string (information about what this csv represents)",
+    "data": [
+      "string (optional, information in this sheet that is not part of the cocktail specification data, e.g., 'this sheet focuses on rum-based cocktails' or 'data collected from various sources including ...')"
+    ]
+  }
+}

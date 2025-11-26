@@ -21,6 +21,11 @@ final class Sheet private (private val service: GSheets, val sheetId: String):
     readRange(range)
   }
 
+  def readName() : String = {
+    val meta = service.spreadsheets().get(sheetId).execute()
+    meta.getProperties.getTitle
+  }
+
   def readAllSheets(): Map[String, Vector[Vector[String]]] = {
     val meta   = service.spreadsheets().get(sheetId).execute()
     val sheets = meta.getSheets.asScala

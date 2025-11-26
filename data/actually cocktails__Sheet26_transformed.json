@@ -1,0 +1,592 @@
+```json
+{
+  "cocktail_specs": [
+    {
+      "name": "summer daze",
+      "rating": "unrated",
+      "family": "Highball",
+      "ice": "rocks",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "rum",
+          "volume_ml": 45.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.rum.dark",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "Suze",
+          "volume_ml": 15.0,
+          "ingredient_type": "bitter",
+          "ingredient_id": "bitter.orange",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lime juice",
+          "volume_ml": 15.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lime",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lemon juice",
+          "volume_ml": 15.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lemon",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "pineapple syrup",
+          "volume_ml": 23.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.pineapple",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "tea syrup",
+          "volume_ml": 8.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.tea",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "soda",
+          "volume_ml": 60.0,
+          "ingredient_type": "other",
+          "ingredient_id": "other.soda",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "shake",
+      "instruction_id": "shake",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": "craft cocktail party",
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "pacific swizzle",
+      "rating": "unrated",
+      "family": "Sours",
+      "ice": "crushed",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "rum",
+          "volume_ml": 60.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.rum.dark",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "tea syrup",
+          "volume_ml": 23.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.tea",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lime juice",
+          "volume_ml": 15.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lime",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "passion fruit puree",
+          "volume_ml": 8.0,
+          "ingredient_type": "other",
+          "ingredient_id": "other.puree",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "shake",
+      "instruction_id": "shake",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "champs-elysees",
+      "rating": "unrated",
+      "family": "Sours",
+      "ice": "up",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "cognac",
+          "volume_ml": 60.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.cognac",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "triple sec",
+          "volume_ml": 23.0,
+          "ingredient_type": "liqueur",
+          "ingredient_id": "liqueur.orange",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "green chartreuse",
+          "volume_ml": 5.0,
+          "ingredient_type": "bitter",
+          "ingredient_id": "bitter.herbal",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lemon juice",
+          "volume_ml": 23.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lemon",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "rich syrup",
+          "volume_ml": 8.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.rich",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "Ango bitters",
+          "volume_ml": 2.0,
+          "ingredient_type": "bitter",
+          "ingredient_id": "bitter.ango",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "shake",
+      "instruction_id": "stir",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "martinez",
+      "rating": "unrated",
+      "family": "Highballs",
+      "ice": "up",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "gin",
+          "volume_ml": 45.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.gin",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "red vermouth",
+          "volume_ml": 30.0,
+          "ingredient_type": "wine",
+          "ingredient_id": "wine.vermouth.red",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "maraschino liqueur",
+          "volume_ml": 5.0,
+          "ingredient_type": "liqueur",
+          "ingredient_id": "liqueur.maraschino",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "Ango bitters",
+          "volume_ml": 2.0,
+          "ingredient_type": "bitter",
+          "ingredient_id": "bitter.ango",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "stir",
+      "instruction_id": "stir",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "flatiron martini",
+      "rating": "unrated",
+      "family": "Martinis",
+      "ice": "up",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "triple sec",
+          "volume_ml": 8.0,
+          "ingredient_type": "liqueur",
+          "ingredient_id": "liqueur.orange",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "stoli oranj / eristoff lime",
+          "volume_ml": 45.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.vodka",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "bianco vermouth",
+          "volume_ml": 45.0,
+          "ingredient_type": "wine",
+          "ingredient_id": "wine.vermouth.bianco",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": null,
+      "instruction_id": null,
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "gin blossom",
+      "rating": "unrated",
+      "family": "Martinis",
+      "ice": "up",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "gin",
+          "volume_ml": 45.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.gin",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "bianco vermouth",
+          "volume_ml": 45.0,
+          "ingredient_type": "wine",
+          "ingredient_id": "wine.vermouth.bianco",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "apricot eau-de-vie",
+          "volume_ml": 23.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.eau_de_vie.apricot",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "orange bitters",
+          "volume_ml": 2.0,
+          "ingredient_type": "bitter",
+          "ingredient_id": "bitter.orange",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "stir",
+      "instruction_id": "stir",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "juniperotivo",
+      "rating": "unrated",
+      "family": "Highballs",
+      "ice": "up",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "gin",
+          "volume_ml": 60.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.gin",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "grenadine",
+          "volume_ml": 23.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.grenadine",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "juniper syrup",
+          "volume_ml": 23.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.juniper",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lime juice",
+          "volume_ml": 30.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lime",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "shake",
+      "instruction_id": "shake",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "jam cosmo",
+      "rating": "unrated",
+      "family": "Highballs",
+      "ice": "up",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "citrus vodka",
+          "volume_ml": 45.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.vodka",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "triple sec",
+          "volume_ml": 23.0,
+          "ingredient_type": "liqueur",
+          "ingredient_id": "liqueur.orange",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lime juice",
+          "volume_ml": 15.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lime",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "rich syrup",
+          "volume_ml": 8.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.rich",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "jam",
+          "volume_ml": 8.0,
+          "ingredient_type": "other",
+          "ingredient_id": "other.jam",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": null,
+      "instruction_id": null,
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "brandy crusta",
+      "rating": "unrated",
+      "family": "Sours",
+      "ice": "up",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "cognac",
+          "volume_ml": 60.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.cognac",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "triple sec",
+          "volume_ml": 15.0,
+          "ingredient_type": "liqueur",
+          "ingredient_id": "liqueur.orange",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "maraschino liqueur",
+          "volume_ml": 15.0,
+          "ingredient_type": "liqueur",
+          "ingredient_id": "liqueur.maraschino",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "Ango bitters",
+          "volume_ml": 1.0,
+          "ingredient_type": "bitter",
+          "ingredient_id": "bitter.ango",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lemon juice",
+          "volume_ml": 23.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lemon",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "shake",
+      "instruction_id": "shake",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": null,
+        "author": null,
+        "date": null
+      }
+    },
+    {
+      "name": "hurricane (craft cocktail party)",
+      "rating": "unrated",
+      "family": "Highballs",
+      "ice": "crushed",
+      "abv_estimate": null,
+      "tasting_notes": null,
+      "history_notes": null,
+      "personal_remarks": null,
+      "ingredients": [
+        {
+          "name": "jamaican rum",
+          "volume_ml": 90.0,
+          "ingredient_type": "spirit",
+          "ingredient_id": "spirit.rum.jamaican",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "lemon juice",
+          "volume_ml": 45.0,
+          "ingredient_type": "juice",
+          "ingredient_id": "juice.lemon",
+          "notes": null,
+          "substitution_suggestions": []
+        },
+        {
+          "name": "passion fruit syrup",
+          "volume_ml": 45.0,
+          "ingredient_type": "syrup",
+          "ingredient_id": "syrup.passionfruit",
+          "notes": null,
+          "substitution_suggestions": []
+        }
+      ],
+      "garnish": [],
+      "instructions": "shake",
+      "instruction_id": "shake",
+      "version": null,
+      "tags": [],
+      "metadata": {
+        "source": "craft cocktail party",
+        "author": null,
+        "date": null
+      }
+    }
+  ],
+  "metadata": {
+    "description": "Cocktail specifications and related information extracted from a Google Sheet.",
+    "data": [
+      "This sheet focuses on various cocktail recipes."
+    ]
+  }
+}
+```
