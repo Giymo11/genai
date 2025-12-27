@@ -1,7 +1,7 @@
 # Compose Setup
 
 This directory contains a Docker Compose setup that orchestrates two services:
-- **MCP Server**: A Python REST API server running on port 5005
+- **MCP Server**: A FastAPI-based REST API server running on port 5005
 - **React App**: A frontend application running on port 5050
 
 ## Prerequisites
@@ -95,6 +95,8 @@ docker compose up --build
 
 - **MCP Server API**: http://localhost:5005
   - Test endpoint: http://localhost:5005/hello
+  - Interactive API docs (Swagger UI): http://localhost:5005/docs
+  - Alternative API docs (ReDoc): http://localhost:5005/redoc
 - **React Frontend**: http://localhost:5050
 
 ## Service Details

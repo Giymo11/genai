@@ -9,6 +9,8 @@ services:
     environment:
       - HOST=0.0.0.0
       - PORT=5005
+      - LLM_API_URL=http://ollama:11434
+      - LLM_MODEL=llama3.2:3b          # match the model defined in ollama service
     restart: unless-stopped
 
   frontend:
@@ -23,3 +25,19 @@ services:
       - PORT=5050
       - API_BASE_URL=http://mcp:5005
     restart: unless-stopped
+
+  ollama:
+    build:
+      context: ./ollama
+    container_name: genai-ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+      - OLLAMA_MODEL=llama3.2:3b   # pick your small model
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama       # IMPORTANT: persists the pulled model
+    restart: unless-stopped
+
+volumes:
+  ollama-data:

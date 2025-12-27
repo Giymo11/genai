@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script builds the Docker image for the MCP server.
+# It is NOT used in the docker compose setup.
+
 IMAGE_NAME="genai-mcp-server"
 IMAGE_TAG="latest"
 
