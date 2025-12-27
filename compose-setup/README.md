@@ -15,6 +15,35 @@ https://docs.docker.com/get-started/introduction/get-docker-desktop/
 
 ## Running the Setup
 
+### Build and run using RAG override
+
+```bash
+docker compose -f docker-compose.yml -f compose-setup/docker-compose.rag.yml up --build -d
+```
+
+Confirm it's running:
+
+```bash
+docker compose ps
+```
+or
+```bash
+docker logs chromadb_rag
+```
+
+Ingestion: (need to fix)
+
+```bash
+docker compose exec mcp python -c "from rag.ingest import ingest; ingest('data/exampledata.json')"
+```
+
+Check that the data is mounted:
+
+```bash
+docker compose exec mcp ls /app/data
+```
+
+
 ### Start the Services
 
 Navigate to this directory and run:
