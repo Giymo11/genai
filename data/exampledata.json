@@ -1,0 +1,239 @@
+{
+  "cocktails": [
+    {
+      "name": "Whiskey Highball",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 45, "ingredient": "whiskey" },
+        { "amount": 180, "ingredient": "soda" }
+      ]
+    },
+    {
+      "name": "Gin and Tonic",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 45, "ingredient": "gin" },
+        { "amount": 180, "ingredient": "tonic" }
+      ]
+    },
+    {
+      "name": "Rum and Coke",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "rum" },
+        { "amount": 180, "ingredient": "cola" }
+      ]
+    },
+    {
+      "name": "Tequila and Beer",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "tequila" },
+        { "amount": 180, "ingredient": "beer" }
+      ]
+    },
+    {
+      "name": "Hot Toddy",
+      "method": "stir",
+      "serve": "neat",
+      "ingredients": [
+        { "amount": 68, "ingredient": "cognac" },
+        { "amount": 15, "ingredient": "lemon" },
+        { "amount": 15, "ingredient": "rich syrup" },
+        { "amount": 120, "ingredient": "hot water" }
+      ]
+    },
+    {
+      "name": "Whiskey Sour",
+      "method": "shake",
+      "serve": "up",
+      "ingredients": [
+        { "amount": 60, "ingredient": "whiskey" },
+        { "amount": 23, "ingredient": "lemon juice" },
+        { "amount": 15, "ingredient": "rich syrup" },
+        { "amount": 1, "ingredient": "angostura bitters" }
+      ]
+    },
+    {
+      "name": "Tom Collins",
+      "method": "shake",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "gin" },
+        { "amount": 30, "ingredient": "lemon juice" },
+        { "amount": 15, "ingredient": "rich syrup" },
+        { "amount": 1, "ingredient": "grapefruit bitters" },
+        { "amount": 60, "ingredient": "soda" }
+      ]
+    },
+    {
+      "name": "Margarita",
+      "method": "shake",
+      "serve": "up",
+      "ingredients": [
+        { "amount": 60, "ingredient": "blanco tequila" },
+        { "amount": 23, "ingredient": "triple sec" },
+        { "amount": 23, "ingredient": "lime juice" },
+        { "amount": 5, "ingredient": "rich syrup" }
+      ]
+    },
+    {
+      "name": "Sidecar",
+      "method": "shake",
+      "serve": "up",
+      "ingredients": [
+        { "amount": 60, "ingredient": "cognac" },
+        { "amount": 23, "ingredient": "curacao" },
+        { "amount": 23, "ingredient": "lemon juice" },
+        { "amount": 8, "ingredient": "demerara syrup" }
+      ]
+    },
+    {
+      "name": "Daiquiri",
+      "method": "shake",
+      "serve": "up",
+      "ingredients": [
+        { "amount": 60, "ingredient": "white rum" },
+        { "amount": 25, "ingredient": "lime juice" },
+        { "amount": 15, "ingredient": "rich syrup" }
+      ]
+    },
+    {
+      "name": "Mai Tai",
+      "method": "shake",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "aged jamaican rum" },
+        { "amount": 15, "ingredient": "dry curacao" },
+        { "amount": 23, "ingredient": "lime juice" },
+        { "amount": 8, "ingredient": "orgeat" },
+        { "amount": 8, "ingredient": "rich syrup" }
+      ]
+    },
+    {
+      "name": "Old Fashioned",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "bourbon/rye" },
+        { "amount": 8, "ingredient": "demerara syrup" },
+        { "amount": 2, "ingredient": "angostura bitters" },
+        { "amount": 1, "ingredient": "orange bitters" }
+      ]
+    },
+    {
+      "name": "Martini 6:1",
+      "method": "stir",
+      "serve": "up",
+      "ingredients": [
+        { "amount": 45, "ingredient": "gin" },
+        { "amount": 8, "ingredient": "blanc vermouth" },
+        { "amount": 1, "ingredient": "bitters" }
+      ]
+    },
+    {
+      "name": "Oaxaca Old Fashioned",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 45, "ingredient": "tequila" },
+        { "amount": 15, "ingredient": "mezcal" },
+        { "amount": 8, "ingredient": "agave syrup" },
+        { "amount": 2, "ingredient": "angostura bitters" },
+        { "amount": 1, "ingredient": "grapefruit bitters" }
+      ]
+    },
+    {
+      "name": "Improved Cognac Cocktail (Sazerac)",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "cognac" },
+        { "amount": 5, "ingredient": "demerara syrup" },
+        { "amount": 5, "ingredient": "maraschino" },
+        { "amount": 4, "ingredient": "peychauds bitters" },
+        { "amount": 1, "ingredient": "absinthe" }
+      ]
+    },
+    {
+      "name": "Ti Punch",
+      "method": "stir",
+      "serve": "no ice",
+      "ingredients": [
+        { "amount": 60, "ingredient": "white rum" },
+        { "amount": 5, "ingredient": "rich syrup" },
+        { "amount": 8, "ingredient": "lime juice" }
+      ]
+    },
+    {
+      "name": "Corn n Oil",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "dark rum" },
+        { "amount": 8, "ingredient": "velvet falernum" }
+      ]
+    },
+    {
+      "name": "Manhattan / Rob Roy",
+      "method": "stir",
+      "serve": "up/rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "scotch" },
+        { "amount": 30, "ingredient": "sweet vermouth" },
+        { "amount": 5, "ingredient": "maraschino" },
+        { "amount": 1, "ingredient": "angostura bitters" },
+        { "amount": 1, "ingredient": "peychauds bitters" }
+      ]
+    },
+    {
+      "name": "White Negroni",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 45, "ingredient": "gin" },
+        { "amount": 30, "ingredient": "blanc vermouth" },
+        { "amount": 23, "ingredient": "suze" },
+        { "amount": 1, "ingredient": "grapefruit bitters" }
+      ]
+    },
+    {
+      "name": "New York Minute",
+      "method": "stir",
+      "serve": "up",
+      "ingredients": [
+        { "amount": 53, "ingredient": "tequila reposado" },
+        { "amount": 23, "ingredient": "sweet vermouth" },
+        { "amount": 15, "ingredient": "maraschino" },
+        { "amount": 5, "ingredient": "rich syrup" },
+        { "amount": 1, "ingredient": "barrel bitters" }
+      ]
+    },
+    {
+      "name": "Le General",
+      "method": "stir",
+      "serve": "rocks",
+      "ingredients": [
+        { "amount": 60, "ingredient": "cognac" },
+        { "amount": 23, "ingredient": "Lillet Blanc" },
+        { "amount": 15, "ingredient": "Benedictine" },
+        { "amount": 2, "ingredient": "Peychaud's bitters" }
+      ]
+    },
+    {
+      "name": "El Presidente",
+      "method": "stir",
+      "serve": "up",
+      "ingredients": [
+        { "amount": 60, "ingredient": "aged rum" },
+        { "amount": 30, "ingredient": "Lillet Blanc" },
+        { "amount": 23, "ingredient": "dry curacao" },
+        { "amount": 5, "ingredient": "grenadine" }
+      ]
+    }
+  ]
+}
