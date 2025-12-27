@@ -18,7 +18,7 @@ https://docs.docker.com/get-started/introduction/get-docker-desktop/
 ### Build and run using RAG override
 
 ```bash
-docker compose -f docker-compose.yml -f compose-setup/docker-compose.rag.yml up --build -d
+docker compose -f docker-compose.yml -f docker-compose.rag.yml up --build -d
 ```
 
 Confirm it's running:
