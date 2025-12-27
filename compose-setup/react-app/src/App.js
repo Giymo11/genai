@@ -55,7 +55,7 @@ function App() {
                     p: 2,
                 }}
             >
-                Right side content
+                Right side content (what should we put here?)
             </Box>
         </Box>
     </Box>

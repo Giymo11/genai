@@ -6,6 +6,15 @@
 IMAGE_NAME="genai-react-app"
 IMAGE_TAG="latest"
 
+# Install dependencies locally if needed
+if [ ! -d "node_modules" ]; then
+  echo "node_modules not found. Running npm install locally..."
+  npm install
+else
+  echo "node_modules already present. Skipping npm install."
+fi
+
+echo ""
 echo "Building Docker image: ${IMAGE_NAME}:${IMAGE_TAG}..."
 
 if docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .; then
