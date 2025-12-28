@@ -36,16 +36,27 @@ docker compose exec mcp python -c "from rag.ingest import ingest; ingest('data/e
   - Converts embeddings to Python lists for ChromaDB
 
 
-### 4. `query.py` (in process)
-- **Purpose**: Perform semantic search over the recipes stored in ChromaDB.
+### 4. `query.py`
+- **Purpose**: Performs semantic search over the recipes stored in ChromaDB. Lets the MCP server or LLM query the vector database.
 - **Functionality**:
   - search_recipes(query: str, k: int = 5) → returns top-k matching recipes
   - Will be called from MCP endpoints for LLM retrieval
 - **Usage**:
 ```bash
-from rag.query import search_recipes
+docker compose exec mcp python -c "from rag.query import search_recipes; results = search_recipes('whiskey'); print(results)"
+```
+It prints recipes received by the query search.
 
-results = search_recipes("whiskey cocktails", k=5)
+
+### 5. `server.py`
+- **Purpose**: Perform a semantic search on ingested recipes using ChromaDB embeddings.
+- **Method**: GET
+- **Query Parameters**:
+  - q (string, required): The search query text (e.g., "whiskey cocktails").
+  - k (integer, optional, default=5): Number of top results to return.
+- **Usage**:
+```bash
+curl "http://localhost:5005/rag/search?q=whiskey&k=3" -UseBasicParsing
 ```
   
 

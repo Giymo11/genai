@@ -2,6 +2,8 @@
 
 A simple Python REST API server with a hello world endpoint.
 
+__Updated Testing Endpoint for RAG__
+
 ## Setup
 
 You can set up the environment using either **venv** (standard Python) or **conda**.
@@ -68,6 +70,20 @@ Expected response:
   "message": "Hello, World!",
   "status": "success"
 }
+```
+## Testing the Endpoint for RAG, using curl
+
+The MCP server, besides /hello, now exposes the following endpoint for RAG:
+
+### `/rag/search`
+- **Method**: GET
+- **Description**: Perform a semantic search on ingested recipes using ChromaDB embeddings.
+- **Query Parameters**:
+  - q (string, required): The search query text (e.g., "whiskey cocktails").
+  - k (integer, optional, default=5): Number of top results to return.
+- **Example Request**:
+```bash
+curl "http://localhost:5005/rag/search?q=whiskey&k=3" -UseBasicParsing
 ```
 
 ### Using a browser
