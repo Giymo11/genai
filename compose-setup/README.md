@@ -1,8 +1,9 @@
 # Compose Setup
 
-This directory contains a Docker Compose setup that orchestrates two services:
+This directory contains a Docker Compose setup that orchestrates multiple services:
 - **MCP Server**: A Python REST API server running on port 5005
 - **React App**: A frontend application running on port 5050
+- **ChromaDB (Vector DB for RAG)**: Running on port 8001
 
 ## Prerequisites
 
@@ -31,17 +32,20 @@ or
 docker logs chromadb_rag
 ```
 
-Ingestion: (need to fix)
-
-```bash
-docker compose exec mcp python -c "from rag.ingest import ingest; ingest('data/exampledata.json')"
-```
-
 Check that the data is mounted:
 
 ```bash
 docker compose exec mcp ls /app/data
 ```
+
+__Ingesting Data into ChromaDB (RAG):__
+
+Once the containers are running, we ingest the JSON dataset (exampledata.json in this case) by running:
+```bash
+docker compose exec mcp python -c "from rag.ingest import ingest; ingest('data/exampledata.json')"
+```
+This reads the json data file, generates embeddings and stores then in ChromaDB (vector database).
+The output will run the MCP server and show how many recipes were ingested.
 
 
 ### Start the Services
