@@ -1,6 +1,26 @@
-fastapi==0.109.0
-uvicorn[standard]==0.27.0
-pydantic==2.7.2
-httpx==0.27.0
-mcp==1.1.2
+fastapi>=0.128.0
+uvicorn[standard]==0.40.0
+
+# --- MCP server side ---
+fastmcp>=2.0.0
+
+# --- LangChain MCP client / agent side ---
+langchain>=1.2.0
+langchain-core>=1.2.5
+langchain-community>=0.4.1
+
+# MCP ↔ LangChain bridge
+langchain-mcp-adapters>=0.2.1
+
+# Agent / tool loop engine
+langgraph>=1.0.5
+
+# Ollama integration
+langchain-ollama>=1.0.1
+
+# --- async + http ---
+httpx>=0.28.1
+anyio>=4.12.0
+pydantic>=2.12.5
+
 

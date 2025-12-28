@@ -6,9 +6,11 @@ services:
     container_name: genai-mcp-server
     ports:
       - "5005:5005"
+      - "6006:6006"
     environment:
       - HOST=0.0.0.0
-      - PORT=5005
+      - REST_API_PORT=5005
+      - MCP_PORT=6006
       - LLM_API_URL=http://ollama:11434
       - LLM_MODEL=llama3.2:3b          # match the model defined in ollama service
     restart: unless-stopped
