@@ -71,6 +71,14 @@ Expected response:
   "status": "success"
 }
 ```
+
+### Using a browser
+
+Open your browser and navigate to:
+```
+http://localhost:5005/hello
+```
+
 ## Testing the Endpoint for RAG, using curl
 
 The MCP server, besides /hello, now exposes the following endpoint for RAG:
@@ -84,13 +92,6 @@ The MCP server, besides /hello, now exposes the following endpoint for RAG:
 - **Example Request**:
 ```bash
 curl "http://localhost:5005/rag/search?q=whiskey&k=3" -UseBasicParsing
-```
-
-### Using a browser
-
-Open your browser and navigate to:
-```
-http://localhost:5005/hello
 ```
 
 ## Deactivating the Environment
