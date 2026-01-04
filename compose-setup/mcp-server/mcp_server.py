@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 mcp = FastMCP("MCP Tools")
 
 @mcp.tool()
-def provide_cocktail_recipe() -> str:
+def provide_cocktail_recipe(input: str) -> str:
     """ Provides a string with a cocktail recipe description """
     logger.info("=== TOOL CALLED: provide_cocktail_recipe ===")
     recipe = """🍹 Classic Mojito Recipe

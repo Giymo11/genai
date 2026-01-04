@@ -48,6 +48,10 @@ restapi = FastAPI(title="Rest Api", version="1.0.0", lifespan=lifespan)
 class PromptRequest(BaseModel):
     prompt: str
 
+class CocktailRecommendRequest(BaseModel):
+    tags: list[str]
+    query: str
+
 @restapi.get('/hello')
 async def hello_world():
     return {
@@ -111,12 +115,73 @@ async def chat(request: PromptRequest):
     if not request.prompt:
         raise HTTPException(status_code=400, detail='Missing or empty "prompt" field')
 
+    if agent is None:
+        raise HTTPException(status_code=503, detail="Agent not initialized")
+
     try:
         # Run agent
         result = await agent.ainvoke(
             {"messages": [
                 {"role": "system", "content": "You are a helpful assistant. When asked about cocktails or recipes, use the provide_cocktail_recipe tool to get the recipe."},
                 {"role": "user", "content": request.prompt}
+            ]}
+        )
+
+        return {
+            "response": result["messages"][-1].content,
+            "status": "success"
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+
+@restapi.post('/recommend_cocktail')
+async def recommend_cocktail(request: CocktailRecommendRequest):
+    """
+    Uses the LangChain agent + MCP tools to recommend a cocktail.
+
+    Input example:
+      {
+        "tags": ["sweet", "refreshing", "ananas"],
+        "query": "I'd like recommendation for a simple summer cocktail based on rum"
+      }
+
+    Requirements:
+    - If not cocktail-related: respond that this service only offers cocktail recipes.
+    - Always respond with a full cocktail recipe.
+    - Never ask follow-up questions.
+    """
+    if agent is None:
+        raise HTTPException(status_code=503, detail="Agent not initialized")
+
+    tags = request.tags or []
+    query = (request.query or "").strip()
+
+    if not query:
+        raise HTTPException(status_code=400, detail='Missing or empty "query" field')
+
+    tags_text = ", ".join([t.strip() for t in tags if t and t.strip()])
+
+    system_prompt = (
+        "You are a cocktail recipe assistant."
+        "\n\nRules (must follow):"
+        "\n1) When selecting or generating a recipe, you should use available tools."
+        "\n2) Always reply with ONE cocktail recipe."
+        "\n3) Never ask a follow-up question. Make reasonable assumptions instead."
+    )
+
+    # Construct a single user message that includes both tags and query.
+    user_prompt = (
+        "Return the best matching cocktail for the following request:\n"
+        f"- Desired features: {tags_text if tags_text else 'none'}\n"
+        f"- Description: {query}\n\n"
+    )
+
+    try:
+        result = await agent.ainvoke(
+            {"messages": [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_prompt},
             ]}
         )
 
