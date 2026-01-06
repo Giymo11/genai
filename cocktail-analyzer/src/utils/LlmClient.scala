@@ -1,5 +1,7 @@
 package utils
 
+import java.net.http.{HttpClient, HttpRequest, HttpResponse}
+import java.net.URI
 import scala.util.control.NonFatal
 import ujson.*
 
@@ -11,14 +13,23 @@ import ujson.*
   */
 private object JsonCodec:
 
-  def encodeRequest(model: String, system: String, user: String, stream: Boolean = false): Value = {
+  def encodeRequest(
+    model: String,
+    system: String,
+    user: String,
+    stream: Boolean = false,
+    temperature: Double = 0.3,
+    maxTokens: Int = 10000
+  ): Value = {
     Obj(
       "model"    -> Str(model),
       "stream"   -> Bool(stream),
       "messages" -> Arr(
         Obj("role" -> Str("system"), "content" -> Str(system)),
         Obj("role" -> Str("user"), "content"   -> Str(user))
-      )
+      ),
+      "temperature" -> Num(temperature),
+      "max_tokens"  -> Num(maxTokens)
     )
   }
 
@@ -78,6 +89,10 @@ object LlmClient:
       System.err.println(s"Unknown llm.provider '$other', defaulting to ollama")
       new OllamaClient(cfg)
 
+  /** Creates an HttpClient configured for HTTP/1.1 */
+  private def createHttpClient(): HttpClient = HttpClient.newBuilder()
+    .version(HttpClient.Version.HTTP_1_1).build()
+
   // ---------------- Ollama implementation ----------------
 
   /** Generic OpenAI-compatible HTTP client.
@@ -95,25 +110,35 @@ object LlmClient:
     headers: Map[String, String] = Map.empty
   ) extends LlmClient:
 
+    private val client = createHttpClient()
+
     def complete(system: String, user: String): String = {
       val bodyJson = JsonCodec.encodeRequest(model, system, user)
       try {
-        val resp = requests.post(
-          url = url,
-          data = bodyJson.render(),
-          headers = headers,
-          readTimeout = 120000,
-          connectTimeout = 5000
-        )
-        if resp.statusCode == 200 then JsonCodec.extractFirstMessageContent(resp.text())
-        else s"[Error] $debugName HTTP ${resp.statusCode}: ${resp.text()}"
+        val requestBuilder = HttpRequest.newBuilder().uri(URI.create(url))
+          .header("Content-Type", "application/json")
+          .POST(HttpRequest.BodyPublishers.ofString(bodyJson.render()))
+
+        // Add custom headers
+        headers.foreach { case (key, value) => requestBuilder.header(key, value) }
+
+        val request  = requestBuilder.build()
+        val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+
+        if response.statusCode() == 200 then JsonCodec.extractFirstMessageContent(response.body())
+        else s"[Error] $debugName HTTP ${response.statusCode()}: ${response.body()}"
       } catch case NonFatal(e) => s"[Error] $debugName request failed: ${e.getMessage}"
     }
 
   // ---------------- Provider-specialized constructors ----------------
 
   final private class OllamaClient(cfg: Config)
-      extends OpenAiApiClient("Ollama", cfg.ollamaUrl, cfg.ollamaModel)
+      extends OpenAiApiClient(
+        "Ollama",
+        cfg.ollamaUrl,
+        cfg.ollamaModel,
+        Map("Content-Type" -> "application/json")
+      )
 
   // ---------------- OpenRouter implementation ----------------
 
