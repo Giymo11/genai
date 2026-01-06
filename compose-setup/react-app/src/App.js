@@ -1,7 +1,8 @@
 import React from 'react';
-import SearchButton from './SearchButton';
 import { Box } from "@mui/material";
-import ContinuousSlider from "./ContinuousSlider";
+import ChosenCategories from "./ChosenCategories";
+import ChatBox from "./ChatBox";
+import CocktailImage from "./sex-on-the-beach-default.jpg";
 
 function App() {
   return (
@@ -30,22 +31,25 @@ function App() {
                     width: "50%",
                     display: "flex",
                     flexDirection: "column",
+                    justifyContent: "space-evenly",
                     p: 2,
                     borderRight: "1px solid ##B0BEC5",// blue grey: https://materialui.co/colors
                 }}
             >
-                <div>
-                    React says: Hello!
-                </div>
-                <Box>
-                    <ContinuousSlider />
+                <Box
+                    sx={{
+                        textAlign: "center",
+                    }}
+                >
+                    <h1>
+                        Instructions here!
+                    </h1>
                 </Box>
                 <Box>
-                    <ContinuousSlider />
-                    <ContinuousSlider />
+                    <ChosenCategories />
+                    <ChatBox />
+                    <ChosenCategories />
                 </Box>
-                <Box>Middle content</Box>
-                <Box sx={{ mt: "auto" }}><SearchButton /></Box>
             </Box>
 
             {/* Right Section */}
@@ -55,7 +59,45 @@ function App() {
                     p: 2,
                 }}
             >
-                Right side content (what should we put here?)
+                <Box
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        p: 4,
+                        m: 2,
+                        border: "1px solid #B0BEC5",
+                        borderRadius: 3,
+                        height: "calc(100% - 92px)",//added margin
+                        alignContent: "center",
+                        alignItems: "center",
+                        justifyContent: "space-evenly",
+                    }}
+                >
+                    <Box>
+                        <h2>Whiskey Sour</h2>
+                    </Box>
+                    <Box
+                        xs={{
+                            width: "75%",
+                        }}
+                    >
+                        <img
+                            style={{ width: "75%", display: "block", margin: "auto" }}
+                            src={CocktailImage}
+                            alt="Cocktail"
+                        />
+                    </Box>
+                    <Box>
+                        <b>Ingredients:</b>
+                        <ul>
+                            <li>60 oz whiskey</li>
+                            <li>20g sugar</li>
+                            <li>20g sugar</li>
+                            <li>20g sugar</li>
+                            <li>20g sugar</li>
+                        </ul>
+                    </Box>
+                </Box>
             </Box>
         </Box>
     </Box>
