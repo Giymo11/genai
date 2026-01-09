@@ -13,6 +13,8 @@ from contextlib import asynccontextmanager
 from rag.query import search_recipes
 # from flask import Flask, jsonify, request
 
+# The following code ingests the data to the vector database, run it once to populate the DB
+# comment it out after the first run, otherwise it will dublicate the data every time the server starts
 # from rag.ingest import ingest
 # ingest('data/exampledata.json')
 
