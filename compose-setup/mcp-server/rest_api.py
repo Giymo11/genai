@@ -192,6 +192,18 @@ async def recommend_cocktail(request: CocktailRecommendRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error: {str(e)}")
+    
+    
+# Added for RAG semantic search
+@restapi.route("/rag/search", methods=["GET"])
+def rag_search():
+    query = request.args.get("q", "")
+    k = int(request.args.get("k", 5))
+    if not query:
+        return jsonify({"error": "Query parameter 'q' is required"}), 400
+
+    results = search_recipes(query, k)
+    return jsonify(results)
 
 if __name__ == '__main__':
     import uvicorn
