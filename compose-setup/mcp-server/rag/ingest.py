@@ -1,9 +1,18 @@
 import json
 from .embeddings import embed
 from .vector_store import get_collection
+import logging
+import sys
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+logger = logging.getLogger(__name__)
 
 def recipe_to_text(r: dict) -> str:
+    logger.info("Converting recipe to text format")
     ingredients_text = ", ".join(
         f"{i['amount']}ml {i['ingredient']}" for i in r.get("ingredients", [])
     )
@@ -20,6 +29,7 @@ def ingest(file_path: str):
     import json
     from .embeddings import embed
     from .vector_store import get_collection
+    logger.info(f"Starting ingestion from file: {file_path}")
 
     with open(file_path, "r", encoding="utf-8") as f:
         data = json.load(f)

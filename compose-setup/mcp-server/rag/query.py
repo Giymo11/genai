@@ -1,5 +1,14 @@
 from .vector_store import get_collection
 from .embeddings import embed
+import logging
+import sys
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[logging.StreamHandler(sys.stdout)]
+)
+logger = logging.getLogger(__name__)
 
 def search_recipes(query: str, k: int = 5):
     """
@@ -12,6 +21,7 @@ def search_recipes(query: str, k: int = 5):
     Returns:
         list of dict: Each dict contains recipe metadata and the text.
     """
+    logger.info(f"Searching for recipes matching query: {query}")
     # Generate embedding for the query
     query_embedding = embed(query)
 

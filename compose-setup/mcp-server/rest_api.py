@@ -11,7 +11,10 @@ import logging
 import sys
 from contextlib import asynccontextmanager
 from rag.query import search_recipes
-from flask import Flask, jsonify, request
+# from flask import Flask, jsonify, request
+
+# from rag.ingest import ingest
+# ingest('data/exampledata.json')
 
 logging.basicConfig(
     level=logging.INFO,
@@ -53,6 +56,10 @@ class PromptRequest(BaseModel):
 class CocktailRecommendRequest(BaseModel):
     tags: list[str]
     query: str
+
+class ChromaSearchRequest(BaseModel):
+    query: str
+    count: int
 
 @restapi.get('/hello')
 async def hello_world():
@@ -197,15 +204,13 @@ async def recommend_cocktail(request: CocktailRecommendRequest):
     
     
 # Added for RAG semantic search
-@restapi.route("/rag/search", methods=["GET"])
-def rag_search():
-    query = request.args.get("q", "")
-    k = int(request.args.get("k", 5))
-    if not query:
-        return jsonify({"error": "Query parameter 'q' is required"}), 400
+@restapi.post("/rag/search")
+def rag_search(request: ChromaSearchRequest):
+    query = request.query
+    n = request.count
 
-    results = search_recipes(query, k)
-    return jsonify(results)
+    results = search_recipes(query, n)
+    return results
 
 if __name__ == '__main__':
     import uvicorn

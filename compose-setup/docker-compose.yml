@@ -11,22 +11,26 @@ services:
       - HOST=0.0.0.0
       - REST_API_PORT=5005
       - MCP_PORT=6006
+      - CHROMA_HOST=chromadb_rag
+      - CHROMA_PORT=8000
       - LLM_API_URL=http://ollama:11434
       - LLM_MODEL=llama3.2:3b          # match the model defined in ollama service
     restart: unless-stopped
+    volumes:
+      - ../data:/app/data
 
-  frontend:
-    build:
-      context: ./react-app
-      dockerfile: Dockerfile
-    container_name: genai-react-app
-    ports:
-      - "5050:5050"
-    environment:
-      - HOST=0.0.0.0
-      - PORT=5050
-      - API_BASE_URL=http://mcp:5005
-    restart: unless-stopped
+#  frontend:
+#    build:
+#      context: ./react-app
+#      dockerfile: Dockerfile
+#    container_name: genai-react-app
+#    ports:
+#      - "5050:5050"
+#    environment:
+#      - HOST=0.0.0.0
+#      - PORT=5050
+#      - API_BASE_URL=http://mcp:5005
+#    restart: unless-stopped
 
   ollama:
     build:
@@ -41,5 +45,14 @@ services:
       - ollama-data:/root/.ollama       # IMPORTANT: persists the pulled model
     restart: unless-stopped
 
+  chromadb_rag:
+    image: chromadb/chroma:latest
+    container_name: chromadb_rag
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma
+
 volumes:
+  chroma_data:
   ollama-data:
