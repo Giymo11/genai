@@ -4,7 +4,7 @@ version: '3.8'
 
 services:
   chromadb_rag:
-    image: chromadb/chroma:latest
+    image: chromadb/chroma:0.4.15
     container_name: chromadb_rag
     ports:
       - "8001:8000"
