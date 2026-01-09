@@ -10,6 +10,8 @@ from langchain_ollama import ChatOllama
 import logging
 import sys
 from contextlib import asynccontextmanager
+from rag.query import search_recipes
+from flask import Flask, jsonify, request
 
 logging.basicConfig(
     level=logging.INFO,
