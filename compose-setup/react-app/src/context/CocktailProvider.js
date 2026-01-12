@@ -7,8 +7,8 @@ export function CocktailProvider({ children }) {
     const [availableCategories] = useState(// no setter needed
         () => new Set(["Sweet", "Bitter", "Sour", "Comfy", "Modern", "Boozy", "Light", "Fruity"])
     );
-
     const [selectedCategories, setSelectedCategories] = useState(() => new Set());
+    const [inputTextField, setInputTextField] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null); // user-facing message
 
@@ -20,6 +20,10 @@ export function CocktailProvider({ children }) {
     const searchCocktail = async () => {
         setLoading(true);
         setError(null);
+        setTimeout(() => {
+            console.log("Test for testing loading spinner");
+            setLoading(false);
+        }, 3000);
 
         /*try {
             const result = await fetchCocktailByCategories(selectedCategories);
@@ -37,28 +41,32 @@ export function CocktailProvider({ children }) {
         } finally {
             setLoading(false);
         }*/
-        setCocktailName("Test1");
-        setCocktailDescription("Test2");
-        setLoading(false);
+        setCocktailName("TODO1");
+        setCocktailDescription("TODO2");
+
     };
 
     const value = useMemo(
         () => ({
             availableCategories,
             selectedCategories,
+            inputTextField,
             loading,
             error,
             cocktailName,
             cocktailDescription,
 
-            // actions
+            // actions (make methods public)
             setSelectedCategories,
+            setInputTextField,
+            setLoading,
             searchCocktail,
             clearError,
         }),
         [
             availableCategories,
             selectedCategories,
+            inputTextField,
             loading,
             error,
             cocktailName,

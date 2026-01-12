@@ -2,10 +2,10 @@ import React from 'react';
 import { Box } from "@mui/material";
 import AvailableCategories from "./AvailableCategories";
 import ChatBox from "./ChatBox";
-import CocktailImage from "./sex-on-the-beach-default.jpg";
 import { CocktailProvider } from "./context/CocktailProvider";
 import CocktailDisplay from "./CocktailDisplay";
 import SelectedCategories from "./SelectedCategories";
+import SendRequestButton from "./SendRequestButton";
 
 function App() {
   return (
@@ -46,13 +46,14 @@ function App() {
                         }}
                     >
                         <h1>
-                            Instructions here!
+                            //TODO insert real text (Instructions here!)
                         </h1>
                     </Box>
                     <Box>
                         <AvailableCategories />
                         <ChatBox />
                         <SelectedCategories />
+                        <SendRequestButton />
                     </Box>
                 </Box>
 

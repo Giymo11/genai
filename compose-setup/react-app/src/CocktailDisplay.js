@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Box from "@mui/material/Box";
 import CocktailImage from "./sex-on-the-beach-default.jpg";
-import { useCocktail } from "../src/context/CocktailProvider"
+import { useCocktail } from "../src/context/CocktailProvider";
 
 export default function CocktailDisplay() {
     const { cocktailName, cocktailDescription, selectedCategories } = useCocktail();

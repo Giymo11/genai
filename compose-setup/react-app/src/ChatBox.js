@@ -1,19 +1,14 @@
 import * as React from 'react';
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import IconButton from "@mui/material/IconButton";
-import SendIcon from "@mui/icons-material/Send";
+import { useCocktail } from "../src/context/CocktailProvider";
 
 export default function ChatBox() {
-    const [userInput, setUserInput] = React.useState("");
+    const { inputTextField, setInputTextField } = useCocktail();
 
     const handleInputChange = (event) => {
-        setUserInput(event.target.value);
-    };
-
-    const handleSend = () => {
-        console.log("User input:", userInput);
-        setUserInput(""); // optional: clear input after send
+        const newInput = event.target.value;
+        setInputTextField(newInput);
     };
 
     return (
@@ -21,7 +16,7 @@ export default function ChatBox() {
             sx={{
                 p: 0.5,
                 m: 0,
-                width: "75%",
+                width: "85%",
                 marginLeft: "auto",
                 marginRight: "auto",
                 marginTop: 6,
@@ -30,7 +25,6 @@ export default function ChatBox() {
                 justifyContent: "flex-end",
             }}
         >
-            {/* Input area */}
             <Box sx={{ display: "flex", alignItems: "center" }}>
                 <TextField
                     fullWidth
@@ -38,18 +32,10 @@ export default function ChatBox() {
                     minRows={3}
                     maxRows={7}
                     placeholder="Type a message..."
-                    value={userInput}
+                    value={inputTextField}
                     onChange={handleInputChange}
                     variant="outlined"
                 />
-
-                <IconButton
-                    onClick={handleSend}
-                    sx={{ ml: 1 }}
-                    color="primary"
-                >
-                    <SendIcon />
-                </IconButton>
             </Box>
         </Box>
     );
