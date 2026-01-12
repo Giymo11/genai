@@ -3,104 +3,70 @@ import { Box } from "@mui/material";
 import ChosenCategories from "./ChosenCategories";
 import ChatBox from "./ChatBox";
 import CocktailImage from "./sex-on-the-beach-default.jpg";
+import { CocktailProvider } from "./context/CocktailProvider";
+import CocktailDisplay from "./CocktailDisplay";
 
 function App() {
   return (
-    <Box
-        sx={{
-            display: "flex",
-            height: "100vh", // full viewport height
-        }}
-    >
+    <CocktailProvider>
         <Box
             sx={{
-                height: "90vh",
-                width: "90vw",
-                margin: "auto",
-
-                // styling
-                bgcolor: "#F5F5F5",
-                borderRadius: 3,
-                border: "1px solid #B0BEC5",// blue grey: https://materialui.co/colors
                 display: "flex",
+                height: "100vh", // full viewport height
             }}
         >
-            {/* Left Section */}
             <Box
                 sx={{
-                    width: "50%",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-evenly",
-                    p: 2,
-                    borderRight: "1px solid ##B0BEC5",// blue grey: https://materialui.co/colors
-                }}
-            >
-                <Box
-                    sx={{
-                        textAlign: "center",
-                    }}
-                >
-                    <h1>
-                        Instructions here!
-                    </h1>
-                </Box>
-                <Box>
-                    <ChosenCategories />
-                    <ChatBox />
-                    <ChosenCategories />
-                </Box>
-            </Box>
+                    height: "90vh",
+                    width: "90vw",
+                    margin: "auto",
 
-            {/* Right Section */}
-            <Box
-                sx={{
-                    width: "50%",
-                    p: 2,
+                    // styling
+                    bgcolor: "#F5F5F5",
+                    borderRadius: 3,
+                    border: "1px solid #B0BEC5",// blue grey: https://materialui.co/colors
+                    display: "flex",
                 }}
             >
+                {/* Left Section */}
                 <Box
                     sx={{
+                        width: "50%",
                         display: "flex",
                         flexDirection: "column",
-                        p: 4,
-                        m: 2,
-                        border: "1px solid #B0BEC5",
-                        borderRadius: 3,
-                        height: "calc(100% - 92px)",//added margin
-                        alignContent: "center",
-                        alignItems: "center",
                         justifyContent: "space-evenly",
+                        p: 2,
+                        borderRight: "1px solid ##B0BEC5",// blue grey: https://materialui.co/colors
                     }}
                 >
-                    <Box>
-                        <h2>Whiskey Sour</h2>
-                    </Box>
                     <Box
-                        xs={{
-                            width: "75%",
+                        sx={{
+                            textAlign: "center",
                         }}
                     >
-                        <img
-                            style={{ width: "75%", display: "block", margin: "auto" }}
-                            src={CocktailImage}
-                            alt="Cocktail"
-                        />
+                        <h1>
+                            Instructions here!
+                        </h1>
                     </Box>
                     <Box>
-                        <b>Ingredients:</b>
-                        <ul>
-                            <li>60 oz whiskey</li>
-                            <li>20g sugar</li>
-                            <li>20g sugar</li>
-                            <li>20g sugar</li>
-                            <li>20g sugar</li>
-                        </ul>
+                        <ChosenCategories />
+                        <ChatBox />
+                        <ChosenCategories />
                     </Box>
+                </Box>
+
+                {/* Right Section */}
+                <Box
+                    sx={{
+                        width: "50%",
+                        p: 2,
+                    }}
+                >
+                    <CocktailDisplay />
                 </Box>
             </Box>
         </Box>
-    </Box>
+    </CocktailProvider>
   );
 }
 
