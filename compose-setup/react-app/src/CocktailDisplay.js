@@ -21,7 +21,7 @@ export default function CocktailDisplay() {
             }}
         >
             <Box>
-                <h2>Whiskey Sour TEST-{ cocktailName }</h2>
+                <h2>{ cocktailName }</h2>
                 <h3>{ cocktailDescription }</h3>
             </Box>
             <Box

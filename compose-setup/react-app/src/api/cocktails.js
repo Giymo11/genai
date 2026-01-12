@@ -32,3 +32,13 @@ export async function fetchCocktailByCategories(selectedCategories = []) {
         description: data?.description ?? "No description available.",
     };
 }
+
+export async function fetchHello() {
+    const res = await fetch("http://localhost:5005/hello");
+
+    if (!res.ok) {
+        throw new Error("Failed to fetch hello message");
+    }
+
+    return await res.json();
+}

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
-import { fetchCocktailByCategories } from "../api/cocktails";
+import {fetchCocktailByCategories, fetchHello} from "../api/cocktails";
 
 const CocktailContext = createContext(null);
 
@@ -41,8 +41,30 @@ export function CocktailProvider({ children }) {
         } finally {
             setLoading(false);
         }*/
-        setCocktailName("TODO1");
-        setCocktailDescription("TODO2");
+
+        try {
+            const result = await fetchHello();
+
+            // Keep previous name/description until the next fetch succeeds (your requirement).
+            setCocktailName(result?.name ?? "");
+            setCocktailDescription(result?.description ?? "");
+            console.log(result);
+            console.log(result.message);
+            console.log(result.status);
+        } catch (e) {
+            // Keep previous cocktailName/cocktailDescription on error (also matches your requirement).
+            const message =
+                typeof e?.message === "string" && e.message.trim().length > 0
+                    ? e.message
+                    : "Something went wrong while fetching a cocktail.";
+            setError(message);
+        } finally {
+            setLoading(false);
+        }
+
+
+        setCocktailName("Whiskey Sour");
+        setCocktailDescription("Lorem ipsum");
 
     };
 
