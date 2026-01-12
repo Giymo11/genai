@@ -2,7 +2,7 @@
 import mill.*
 import mill.scalalib.*
 
-object `cocktail-analyzer` extends ScalaModule:
+object `dataprocessing` extends ScalaModule:
   def scalaVersion = "3.7.3"
 
   def mvnDeps = Seq(
@@ -19,4 +19,4 @@ object `cocktail-analyzer` extends ScalaModule:
     "-Djava.net.preferIPv4Stack=true",
     "-Dsun.net.http.allowRestrictedHeaders=true" // Allows manual header overriding
   )
-end `cocktail-analyzer`
+end `dataprocessing`

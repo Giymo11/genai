@@ -13,3 +13,10 @@ secrets/
 *.exe
 *.bat
 mill
+
+# ours
+data/chunks
+data/downloaded
+data/debug
+data/tmp
+

@@ -2,7 +2,7 @@ package utils
 
 import scala.annotation.tailrec
 
-object Csv:
+object Tsv:
 
   type Grid = Vector[Vector[String]]
 
@@ -23,7 +23,7 @@ object Csv:
   /** Parses a Tab-Separated Value string into a grid of strings. Pure functional implementation
     * using tail recursion.
     */
-  def parse(csvContent: String): Grid = {
+  def parse(tsvContent: String): Grid = {
 
     @tailrec
     def parseRec(
@@ -65,29 +65,27 @@ object Csv:
       case c :: tail => parseRec(tail, inQuotes, c :: cellAcc, rowAcc, result)
     }
 
-    parseRec(csvContent.toList, inQuotes = false, Nil, Vector.empty, Vector.empty)
+    parseRec(tsvContent.toList, inQuotes = false, Nil, Vector.empty, Vector.empty)
   }
 
-/**
-   * Recursively splits a grid into sub-blocks based on empty rows and columns.
-   * 
-   * Strategy:
-   * 1. Split by empty rows. 
-   * 2. If splits occurred, recurse on the parts.
-   * 3. If no splits occurred (the block is vertically contiguous), 
-   *    transpose and attempt to split by columns.
-   */
-  def extractBlocks(grid: Grid): Vector[Grid] =
+  /** Recursively splits a grid into sub-blocks based on empty rows and columns.
+    *
+    * Strategy:
+    *   1. Split by empty rows.
+    *   2. If splits occurred, recurse on the parts.
+    *   3. If no splits occurred (the block is vertically contiguous), transpose and attempt to
+    *      split by columns.
+    */
+  def extractBlocks(grid: Grid): Vector[Grid] = {
     if grid.isEmpty then Vector.empty
-    else
+    else {
       def isEmptyRow(row: Vector[String]): Boolean = row.forall(_.trim.isEmpty)
 
       // 1. Split vertically (Rows)
       val rowBlocks = splitBy(grid)(isEmptyRow)
 
       rowBlocks match
-        case Vector() => 
-          Vector.empty // The whole grid was empty
+        case Vector() => Vector.empty // The whole grid was empty
 
         case blocks if blocks.size > 1 =>
           // Gap found! We must recurse on the sub-blocks
@@ -98,46 +96,41 @@ object Csv:
           // 2. Split horizontally (Cols) on the row-trimmed block
           val normalized = normalizeGrid(singleRowBlock)
           val transposed = normalized.transpose
-          val colBlocks = splitBy(transposed)(isEmptyRow)
+          val colBlocks  = splitBy(transposed)(isEmptyRow)
 
           colBlocks match
-            case Vector() => 
-              Vector.empty
-            
+            case Vector() => Vector.empty
+
             case cBlocks if cBlocks.size > 1 =>
               // Gap found horizontally! Recurse (and transpose back later)
               cBlocks.flatMap(b => extractBlocks(b.transpose))
-            
+
             case Vector(singleColBlock) =>
-              // No internal gaps found. 
+              // No internal gaps found.
               // This block is now trimmed of both empty rows AND empty columns.
               Vector(singleColBlock.transpose)
+    }
+  }
 
-  /**
-   * A pure functional generic split. 
-   * similar to string.split, but for Vectors and keeps 'chunks' distinct.
-   * Consecutive separators are treated as one break.
-   */
-  private def splitBy[T](data: Vector[T])(isSeparator: T => Boolean): Vector[Vector[T]] =
+  /** A pure functional generic split. similar to string.split, but for Vectors and keeps 'chunks'
+    * distinct. Consecutive separators are treated as one break.
+    */
+  private def splitBy[T](data: Vector[T])(isSeparator: T => Boolean): Vector[Vector[T]] = {
     val (lastChunk, accumulated) = data.foldLeft((Vector.empty[T], Vector.empty[Vector[T]])) {
       case ((currentChunk, acc), item) =>
         if isSeparator(item) then
           if currentChunk.nonEmpty then (Vector.empty, acc :+ currentChunk)
           else (Vector.empty, acc) // Skip consecutive separators or leading separators
-        else
-          (currentChunk :+ item, acc)
+        else (currentChunk :+ item, acc)
     }
     // Append the final chunk if it wasn't empty
     if lastChunk.nonEmpty then accumulated :+ lastChunk else accumulated
+  }
 
-  /**
-   * Ensures the grid is rectangular so it can be transposed safely.
-   * Finds the max row length and pads shorter rows with empty strings.
-   */
+  /** Ensures the grid is rectangular so it can be transposed safely. Finds the max row length and
+    * pads shorter rows with empty strings.
+    */
   private def normalizeGrid(grid: Grid): Grid =
     val maxWidth = grid.map(_.size).maxOption.getOrElse(0)
-    grid.map(row => 
-      if row.size < maxWidth then row ++ Vector.fill(maxWidth - row.size)("") 
-      else row
-    )
-
+    grid
+      .map(row => if row.size < maxWidth then row ++ Vector.fill(maxWidth - row.size)("") else row)

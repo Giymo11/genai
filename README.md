@@ -35,5 +35,3 @@ for the cocktail analyzer:
 ```bash
 ./mill cocktail-analyzer.run
 ```
-
-

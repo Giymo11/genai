@@ -19,7 +19,7 @@ private object JsonCodec:
     user: String,
     stream: Boolean = false,
     temperature: Double = 0.3,
-    maxTokens: Int = 10000
+    maxTokens: Int = 30000
   ): Value = {
     Obj(
       "model"    -> Str(model),
