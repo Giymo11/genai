@@ -6,6 +6,7 @@ import AddCircle from '@mui/icons-material/AddCircle';
 import CheckCircle from '@mui/icons-material/CheckCircle';
 import { useCocktail } from "./context/CocktailProvider";
 import Box from "@mui/material/Box";
+import {Typography} from "@mui/material";
 
 const ListItem = styled('li')(({ theme }) => ({
     margin: theme.spacing(0.5),
@@ -26,7 +27,13 @@ export default function AvailableCategories() {
 
     return (
         <Box>
-            <h2>Available categories</h2>
+            <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+            >
+                Available categories:
+            </Typography>
             <Paper
                 sx={{
                     display: 'flex',

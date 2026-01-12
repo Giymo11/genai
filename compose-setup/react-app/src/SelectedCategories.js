@@ -29,6 +29,7 @@ export default function SelectedCategories() {
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
+                minHeight: '48px' //required so nothing "jumps" when first category is added
             }}
         >
             <Typography
