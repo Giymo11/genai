@@ -1,15 +1,14 @@
-// src/context/CocktailProvider.js
-
 import React, { createContext, useContext, useMemo, useState } from "react";
 import { fetchCocktailByCategories } from "../api/cocktails";
 
 const CocktailContext = createContext(null);
 
 export function CocktailProvider({ children }) {
-    // Hardcoded for now, as requested
-    const [possibleCategories] = useState(["Sweet", "Bitter", "Sour", "Comfy", "Modern", "Boozy", "Light", "Fruity"]);
+    const [availableCategories] = useState(// no setter needed
+        () => new Set(["Sweet", "Bitter", "Sour", "Comfy", "Modern", "Boozy", "Light", "Fruity"])
+    );
 
-    const [selectedCategories, setSelectedCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState(() => new Set());
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null); // user-facing message
 
@@ -45,7 +44,7 @@ export function CocktailProvider({ children }) {
 
     const value = useMemo(
         () => ({
-            possibleCategories,
+            availableCategories,
             selectedCategories,
             loading,
             error,
@@ -58,7 +57,7 @@ export function CocktailProvider({ children }) {
             clearError,
         }),
         [
-            possibleCategories,
+            availableCategories,
             selectedCategories,
             loading,
             error,

@@ -44,10 +44,6 @@ export default function CocktailDisplay() {
                     <li>20g sugar</li>
                     <li>20g sugar</li>
                 </ul>
-                more:
-                <ol>
-                    { selectedCategories.map((category) => <li>{ category }</li>) }
-                </ol>
             </Box>
         </Box>
     );

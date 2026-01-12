@@ -3,8 +3,6 @@ import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import AddCircle from '@mui/icons-material/AddCircle';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import DeleteIcon from '@mui/icons-material/Delete';
 import CheckCircle from '@mui/icons-material/CheckCircle';
 import { useCocktail } from "./context/CocktailProvider";
 import Box from "@mui/material/Box";
@@ -15,28 +13,15 @@ const ListItem = styled('li')(({ theme }) => ({
 
 export default function AvailableCategories() {
     const { selectedCategories, setSelectedCategories } = useCocktail();
-    const [chipData, setChipData] = React.useState([
-        { key: 0, label: 'Sweet' },
-        { key: 1, label: 'Bitter' },
-        { key: 2, label: 'Sour' },
-        { key: 3, label: 'Comfy' },
-        { key: 4, label: 'Modern' },
-        { key: 5, label: 'Boozy' },
-        { key: 6, label: 'Light' },
-        { key: 7, label: 'Fruity' },
-    ]);
+    const { availableCategories } = useCocktail();
 
-    const handleDelete = (categoryToDelete) => () => {
-        console.log("Deleting category: ", categoryToDelete);
-        // setCategory((chips) => categories.filter((category) => category.key !== categoryToDelete.key));
-    };
-
-    const addSelectedCategory = (category) => () => {
-        console.log("Adding category: ", category);
-        const updatedSelectedCategories = [...selectedCategories, category];
-        setSelectedCategories(updatedSelectedCategories);
-        console.log("Does it contain fruity? ", updatedSelectedCategories.includes("Fruity"));
-        console.log("Updated selected categories: ", updatedSelectedCategories);
+    const addSelectedCategory = (categoryToAdd) => () => {
+        console.log("Adding category: ", categoryToAdd);
+        setSelectedCategories(prev => {// adding is not as simple as with array
+            const next = new Set(prev);
+            next.add(categoryToAdd);
+            return next;
+        });
     }
 
     return (
@@ -55,29 +40,26 @@ export default function AvailableCategories() {
                 }}
                 component="ul"
             >
-                {chipData.map((data) => {
+                {Array.from(availableCategories).map((category) => {
                     let icon = <AddCircle />;
                     let color = "default";
                     let variant = "default";
-                    let clickable = true;
 
 
-                    if (selectedCategories.includes(data.label)) {
+                    if (selectedCategories.has(category)) {
                         icon = <CheckCircle />;
                         color = "success";
                         variant = "outlined";
-                        clickable = false;
                     }
 
                     return (
-                        <ListItem key={data.key}>
+                        <ListItem key={category}>
                             <Chip
                                 icon={icon}
-                                label={data.label}
-                                onClick={addSelectedCategory(data.label)}
+                                label={category}
+                                onClick={addSelectedCategory(category)}
                                 color={color}
                                 variant={variant}
-                                clickable={clickable}
                             />
                         </ListItem>
                     );

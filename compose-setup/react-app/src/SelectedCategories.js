@@ -2,12 +2,10 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
-import AddCircle from '@mui/icons-material/AddCircle';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
-import CheckCircle from '@mui/icons-material/CheckCircle';
 import { useCocktail } from "./context/CocktailProvider";
 import Box from "@mui/material/Box";
+import {Typography} from "@mui/material";
 
 const ListItem = styled('li')(({ theme }) => ({
     margin: theme.spacing(0.5),
@@ -18,14 +16,28 @@ export default function SelectedCategories() {
 
     const handleDelete = (categoryToDelete) => () => {
         console.log("Deleting category: ", categoryToDelete);
-        const updatedSelectedCategories = selectedCategories.filter((category) => category !== categoryToDelete);
-        setSelectedCategories(updatedSelectedCategories);
-        // setCategory((chips) => categories.filter((category) => category.key !== categoryToDelete.key));
+        setSelectedCategories(prev => {// deleting is not as simple as with array
+            const next = new Set(prev); // clonging set, important!
+            next.delete(categoryToDelete);
+            return next;
+        });
     };
 
     return (
-        <Box>
-            <h2>Selected categories</h2>
+        <Box
+            sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}
+        >
+            <Typography
+                variant="body2"
+                fontWeight="bold"
+                textAlign="center"
+            >
+                { selectedCategories.size > 0 ? "Selected categories:" : "No selected categories yet" }
+            </Typography>
             <Paper
                 sx={{
                     display: 'flex',
@@ -39,26 +51,14 @@ export default function SelectedCategories() {
                 }}
                 component="ul"
             >
-                {selectedCategories.map((category) => {
-                    /*let icon = <AddCircle />;
-                    let color = "default";
-                    let variant = "default";
-
-
-                    if (selectedCategories.includes(data.label)) {
-                        icon = <CheckCircle />;
-                        color = "success";
-                        variant = "outlined";
-                    }*/
-
+                {Array.from(selectedCategories).map((category) => {// creating an array from set for iteration
                     return (
                         <ListItem key={category}>
                             <Chip
-                                // icon={icon}
                                 label={category}
-                                // onClick={addSelectedCategory(data.label)}
-                                color="default"
+                                color="primary"
                                 onDelete={handleDelete(category)}
+                                deleteIcon={<DeleteIcon />}
                             />
                         </ListItem>
                     );
