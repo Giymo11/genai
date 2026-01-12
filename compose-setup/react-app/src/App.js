@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box } from "@mui/material";
-import ChosenCategories from "./ChosenCategories";
+import AvailableCategories from "./AvailableCategories";
 import ChatBox from "./ChatBox";
 import CocktailImage from "./sex-on-the-beach-default.jpg";
 import { CocktailProvider } from "./context/CocktailProvider";
 import CocktailDisplay from "./CocktailDisplay";
+import SelectedCategories from "./SelectedCategories";
 
 function App() {
   return (
@@ -49,9 +50,9 @@ function App() {
                         </h1>
                     </Box>
                     <Box>
-                        <ChosenCategories />
+                        <AvailableCategories />
                         <ChatBox />
-                        <ChosenCategories />
+                        <SelectedCategories />
                     </Box>
                 </Box>
 

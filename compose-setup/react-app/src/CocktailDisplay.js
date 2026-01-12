@@ -4,7 +4,7 @@ import CocktailImage from "./sex-on-the-beach-default.jpg";
 import { useCocktail } from "../src/context/CocktailProvider"
 
 export default function CocktailDisplay() {
-    const { cocktailName, cocktailDescription } = useCocktail();
+    const { cocktailName, cocktailDescription, selectedCategories } = useCocktail();
     return (
         <Box
             sx={{
@@ -44,6 +44,10 @@ export default function CocktailDisplay() {
                     <li>20g sugar</li>
                     <li>20g sugar</li>
                 </ul>
+                more:
+                <ol>
+                    { selectedCategories.map((category) => <li>{ category }</li>) }
+                </ol>
             </Box>
         </Box>
     );
