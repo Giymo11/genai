@@ -72,8 +72,8 @@ def ingest(file_path: str):
                 "name": recipe.get("name", ""),
                 "method": recipe.get("method", ""),
                 "description": recipe.get("description", ""),
-                "serve": recipe.get("serve", ""),
-                "tags": recipe.get("tags", [])
+                # "tags": ", ".join(recipe.get("tags", [])),
+                "serve": recipe.get("serve", "")
             }]
         )
         count += 1
