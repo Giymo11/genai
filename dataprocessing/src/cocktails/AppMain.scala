@@ -437,13 +437,14 @@ object AppMain:
         val cleanResponse = response.replaceAll("^```json", "").replaceAll("^```", "")
           .replaceAll("```$", "").trim
 
-        val result = try {
-          ujson.read(cleanResponse)
-        } catch {
-          case e: Exception =>
-            println(s"  Failed to parse enriched JSON for $cocktailName: ${e.getMessage}")
-            // fallback to original spec if enrichment fails
-            spec
+        val result = {
+          try { ujson.read(cleanResponse) }
+          catch {
+            case e: Exception =>
+              println(s"  Failed to parse enriched JSON for $cocktailName: ${e.getMessage}")
+              // fallback to original spec if enrichment fails
+              spec
+          }
         }
 
         // ETA tracking
@@ -472,6 +473,28 @@ object AppMain:
     val enrichedFile = dataDir / "enriched_cocktail_data.json"
     os.write.over(enrichedFile, ujson.write(finalEnrichedData, indent = 2))
     println(s"Saved enriched dataset to: ${enrichedFile.last}")
+  }
+
+  // --------- some hepler methods ------------
+
+  @main(name = "uniqueTags", doc = "list all unique tags in the dataset")
+  def uniqueTags() = {
+    val dataDir  = os.pwd / "data"
+    val dataFile = dataDir / "enriched_cocktail_data.json"
+    val data     = ujson.read(os.read(dataFile))
+
+    val tags = data("cocktail_specs").arr.flatMap {
+      cocktail =>
+        // if tags exist, extract them
+        // otherwise return empty list
+        // cocktail("tags").arr.map(_.str)
+        cocktail.obj.get("tags").map(_.arr.map(_.str)).getOrElse(Nil)
+    }.toSet.toList.sorted
+
+    // save as txt
+    val tagsFile = dataDir / "unique_tags.txt"
+    os.write.over(tagsFile, tags.mkString("\n"))
+    println(s"Saved unique tags to: ${tagsFile.last}")
   }
 
   @main(
