@@ -190,9 +190,11 @@ async def recommend_cocktail(request: CocktailRecommendRequest):
         "\n3) Never ask a follow-up question. Make reasonable assumptions instead."
         "\n4) Give every cocktail a name and wrap this name in h2-tag for valid html code."
         "\n5) Your response should immediately start with the h2 tag and the title of the cocktail."
-        "\n6) For each cocktail, create a title, a bullet point list of ingredients and a bullet point list on the method."
-        "\n7) Explicitly name both bullet point lists by adding a title above each bullet point list."
+        "\n6) The title should be followed by a friendly one sentence description of the cocktail."
+        "\n6) For each cocktail, create a title, a bullet point list of ingredients and a fun and friendly preparation description."
+        "\n7) Explicitly name the ingredient bullet point lists by adding a title above it."
         "\n8) Wrap the bullet points into valid ul or li tags and produce valid HTML markup"
+        "\n9) The ingredients list should be followed by the preparation instructions."
     )
 
     # Construct a single user message that includes both tags and query.
