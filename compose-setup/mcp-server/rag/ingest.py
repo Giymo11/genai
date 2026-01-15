@@ -16,11 +16,15 @@ def recipe_to_text(r: dict) -> str:
     ingredients_text = ", ".join(
         f"{i['amount']}ml {i['ingredient']}" for i in r.get("ingredients", [])
     )
+    
+    tags_text = ", ".join(r.get("tags", []))
 
     return f"""
 Recipe name: {r.get('name', '')}
 Method: {r.get('method', '')}
 Serve: {r.get('serve', '')}
+Description: {r.get('description', '')}
+Tags: {tags_text}
 Ingredients: {ingredients_text}
 """.strip()
 
@@ -36,8 +40,8 @@ def ingest(file_path: str):
 
     # Extract the recipes list depending on JSON shape
     if isinstance(data, dict):
-        if "cocktails" in data:
-            recipes = data["cocktails"]
+        if "cocktail_specs" in data:
+            recipes = data["cocktail_specs"]
         else:
             recipes = [data]  # fallback single recipe dict
     elif isinstance(data, list):
@@ -63,7 +67,8 @@ def ingest(file_path: str):
             metadatas=[{
                 "name": recipe.get("name", ""),
                 "method": recipe.get("method", ""),
-                "serve": recipe.get("serve", "")
+                "serve": recipe.get("serve", ""),
+                "tags": recipe.get("tags", [])
             }]
         )
         count += 1
