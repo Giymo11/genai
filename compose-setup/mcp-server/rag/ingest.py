@@ -66,10 +66,10 @@ def ingest(file_path: str):
             embeddings=[embedding],
             ids=[f"recipe-{idx}"],
             metadatas=[{
-                "name": recipe.get("name", ""),
-                "method": recipe.get("method", ""),
-                "description": recipe.get("description", ""),
-                "serve": recipe.get("serve", "")
+                "name": str(recipe.get("name", "")),
+                "method": str(recipe.get("method", "")),
+                "description": str(recipe.get("description", "")),
+                "serve": str(recipe.get("serve", ""))
             }]
         )
         count += 1
