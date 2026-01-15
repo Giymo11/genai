@@ -11,6 +11,8 @@ import logging
 import sys
 from contextlib import asynccontextmanager
 from rag.query import search_recipes
+from fastapi.middleware.cors import CORSMiddleware
+
 # from flask import Flask, jsonify, request
 
 # The following code ingests the data to the vector database, run it once to populate the DB
@@ -51,6 +53,13 @@ async def lifespan(restapi: FastAPI):
     yield
 
 restapi = FastAPI(title="Rest Api", version="1.0.0", lifespan=lifespan)
+restapi.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],           # Allows all origins
+    allow_credentials=True,
+    allow_methods=["*"],           # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],           # Allows all headers
+)
 
 class PromptRequest(BaseModel):
     prompt: str
@@ -179,6 +188,11 @@ async def recommend_cocktail(request: CocktailRecommendRequest):
         "\n1) When selecting or generating a recipe, you should use available tools."
         "\n2) Always reply with ONE cocktail recipe."
         "\n3) Never ask a follow-up question. Make reasonable assumptions instead."
+        "\n4) Give every cocktail a name and wrap this name in h2-tag for valid html code."
+        "\n5) Your response should immediately start with the h2 tag and the title of the cocktail."
+        "\n6) For each cocktail, create a title, a bullet point list of ingredients and a bullet point list on the method."
+        "\n7) Explicitly name both bullet point lists by adding a title above each bullet point list."
+        "\n8) Wrap the bullet points into valid ul or li tags and produce valid HTML markup"
     )
 
     # Construct a single user message that includes both tags and query.
