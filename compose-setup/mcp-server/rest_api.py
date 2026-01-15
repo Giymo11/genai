@@ -6,7 +6,7 @@ from pydantic import BaseModel
 import os
 import httpx
 import json
-from langchain_ollama import ChatOllama
+from langchain_openai import ChatOpenAI
 import logging
 import sys
 from contextlib import asynccontextmanager
@@ -28,8 +28,9 @@ logging.basicConfig(
 
 logger = logging.getLogger(__name__)
 
-llm_api_url = os.getenv('LLM_API_URL', 'http://ollama:11434')
+llm_api_url = os.getenv('LLM_API_URL', 'http://ollama:11434/v1')
 llm_model = os.getenv('LLM_MODEL', 'llama3.2:3b')
+openai_api_key = os.getenv('OPENAI_API_KEY', 'ollama')
 
 mcp_client = None
 tools = None
@@ -48,7 +49,11 @@ async def lifespan(restapi: FastAPI):
     )
     tools = await mcp_client.get_tools()
     logger.info(f"Available tools: {[t.name for t in tools]}")
-    llm = ChatOllama(model=llm_model, base_url=llm_api_url)
+    llm = ChatOpenAI(
+        model=llm_model, 
+        base_url=llm_api_url,
+        api_key=openai_api_key
+    )
     agent = create_agent(llm, tools)
     yield
 
@@ -88,27 +93,31 @@ async def generate_stream(request: PromptRequest):
     if not request.prompt:
         raise HTTPException(status_code=400, detail='Missing or empty "prompt" field')
 
-    ollama_url = f"{llm_api_url}/api/generate"
-    ollama_payload = {
+    openai_url = f"{llm_api_url}/chat/completions"
+    openai_payload = {
         'model': llm_model,
-        'prompt': request.prompt,
+        'messages': [{'role': 'user', 'content': request.prompt}],
         'stream': True
     }
 
     async def generate():
         try:
             async with httpx.AsyncClient(timeout=300.0) as client:
-                async with client.stream('POST', ollama_url, json=ollama_payload) as response:
+                headers = {"Authorization": f"Bearer {openai_api_key}"}
+                async with client.stream('POST', openai_url, json=openai_payload, headers=headers) as response:
                     response.raise_for_status()
 
                     async for line in response.aiter_lines():
-                        if line:
+                        if line.startswith("data: "):
+                            data_str = line[6:]
+                            if data_str == "[DONE]":
+                                break
                             try:
-                                chunk = json.loads(line)
-                                if 'response' in chunk:
-                                    yield chunk['response']
-                                if chunk.get('done', False):
-                                    break
+                                chunk = json.loads(data_str)
+                                if 'choices' in chunk and len(chunk['choices']) > 0:
+                                    delta = chunk['choices'][0].get('delta', {})
+                                    if 'content' in delta:
+                                        yield delta['content']
                             except json.JSONDecodeError:
                                 continue
 
@@ -142,7 +151,7 @@ async def chat(request: PromptRequest):
         # Run agent
         result = await agent.ainvoke(
             {"messages": [
-                {"role": "system", "content": "You are a helpful assistant. When asked about cocktails or recipes, use the provide_cocktail_recipe tool to get the recipe."},
+                {"role": "system", "content": "You are a helpful assistant. When asked about cocktails or recipes, use the search_for_cocktail_recipes_in_db tool to get the recipe."},
                 {"role": "user", "content": request.prompt}
             ]}
         )
@@ -201,6 +210,8 @@ async def recommend_cocktail(request: CocktailRecommendRequest):
         f"- Desired features: {tags_text if tags_text else 'none'}\n"
         f"- Description: {query}\n\n"
     )
+
+    logger.info(f"User prompt: {user_prompt}")
 
     try:
         result = await agent.ainvoke(

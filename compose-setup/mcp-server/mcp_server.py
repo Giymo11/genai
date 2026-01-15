@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 mcp = FastMCP("MCP Tools")
 
 # @mcp.tool()
-# def provide_cocktail_recipe(input: str) -> str:
+# def provide_cocktail_recipe(query: str) -> str:
 #     """ Provides a string with a cocktail recipe description """
 #     logger.info("=== TOOL CALLED: provide_cocktail_recipe ===")
 #     recipe = """🍹 Classic Mojito Recipe
@@ -49,10 +49,13 @@ mcp = FastMCP("MCP Tools")
 #     return recipe
 
 @mcp.tool()
-def search_for_cocktail_recipes_in_db(input: str) -> str:
-    """ Provides a string with a cocktail recipe description """
+def search_for_cocktail_recipes_in_db(query: str) -> str:
+    """
+    Search for cocktail recipes in the database based on a query string.
+    Returns a JSON string containing matching recipes.
+    """
     logger.info("=== TOOL CALLED: search_for_cocktail_recipes_in_db ===")
-    result = search_recipes(input, k=5)
+    result = search_recipes(query, k=5)
     return json.dumps(result)
 
 if __name__ == '__main__':

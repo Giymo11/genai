@@ -15,8 +15,8 @@ langchain-mcp-adapters>=0.2.1
 # Agent / tool loop engine
 langgraph>=1.0.5
 
-# Ollama integration
-langchain-ollama>=1.0.1
+# OpenAI integration
+langchain-openai>=1.1.7
 
 # --- async + http ---
 httpx>=0.28.1

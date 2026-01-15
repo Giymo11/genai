@@ -15,6 +15,7 @@ services:
       - CHROMA_PORT=8000
       - LLM_API_URL=http://ollama:11434
       - LLM_MODEL=llama3.2:3b          # match the model defined in ollama service
+      - OPENAI_API_KEY=ollama          # dummy value, not used for Ollama
     restart: unless-stopped
     volumes:
       - ../data:/app/data
