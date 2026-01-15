@@ -5,7 +5,7 @@ const CocktailContext = createContext(null);
 
 export function CocktailProvider({ children }) {
     const [availableCategories] = useState(// no setter needed
-        () => new Set(["Sweet", "Bitter", "Sour", "Comfy", "Modern", "Boozy", "Light", "Fruity"])
+        () => new Set(["Classic", "Rum", "Whisky", "Tropical", "Fruity", "Bitter", "Non-Alcoholic", "Comfy", "Innovative", "Summer", "Japanese", "Refreshing", "Film-inspired", "Adaptable", "Intense", "Aperitif"])
     );
     const [selectedCategories, setSelectedCategories] = useState(() => new Set());
     const [inputTextField, setInputTextField] = useState("");
