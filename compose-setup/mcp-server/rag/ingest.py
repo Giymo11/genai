@@ -13,8 +13,12 @@ logger = logging.getLogger(__name__)
 
 def recipe_to_text(r: dict) -> str:
     logger.info("Converting recipe to text format")
+    # ingredients_text = ", ".join(
+    #     f"{i['amount']}ml {i['ingredient']}" for i in r.get("ingredients", [])
+    # )
     ingredients_text = ", ".join(
-        f"{i['amount']}ml {i['ingredient']}" for i in r.get("ingredients", [])
+        f"{i.get('volume_ml', '?')}ml {i.get('name', '?')} ({i.get('taxonomy','')})" 
+        for i in r.get("ingredients", [])
     )
     
     tags_text = ", ".join(r.get("tags", []))
@@ -67,10 +71,14 @@ def ingest(file_path: str):
             metadatas=[{
                 "name": recipe.get("name", ""),
                 "method": recipe.get("method", ""),
+                "description": recipe.get("description", ""),
                 "serve": recipe.get("serve", ""),
                 "tags": recipe.get("tags", [])
             }]
         )
         count += 1
+        
+    #     del texts, embeddings
+    #     gc.collect()
 
     print(f"Ingested {count} recipes into ChromaDB")
