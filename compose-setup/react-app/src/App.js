@@ -46,9 +46,9 @@ function App() {
                         }}
                     >
                         <h1>
-                            Welcome to the smartes cocktail mixer
+                            Welcome to the smartes cockt-AI-l mixer
                         </h1>
-                        <h2>Add your wishes below and get excited about your Cockt<b>AI</b>l</h2>
+                        <h2>Add your wishes below and get excited about your Cocktail</h2>
                     </Box>
                     <Box>
                         <AvailableCategories />
@@ -73,22 +73,5 @@ function App() {
     </CocktailProvider>
   );
 }
-
-/* Notes from assignment
-The system will be provided as a web application, offering:
-A clean and simple ingredient input interface.
-A search bar supporting natural language queries.
-We consider a web application to be the most useful for our users,
-since it is the most accessible in various situations and for different
-workflows. For instance, a larger screen could show the app in a home
-office setting where the user prepares for a cocktail session, a tablet
-running the web application could be installed behind the counter in a
-bar to prepare cocktails. In addition, even a phone could be used on the
-go if no other larger screen is available.
-Another aspect for choosing a web application lies in its simplicity for
-creating applications with existing tools/frameworks. Web applications are
-independent of an operating system, provide easy access via every browser as
-well as rapid application development.
- */
 
 export default App;

@@ -31,6 +31,7 @@ export default function CocktailDisplay() {
                     <Box sx={{
                         display: 'flex',
                         justifyContent: 'center',
+                        alignItems: 'center',
                         flexDirection: "column",
                         my: 5
                     }}>
@@ -39,10 +40,20 @@ export default function CocktailDisplay() {
                             fontWeight="bold"
                             textAlign="center"
                             sx={{
-                                my: 3,
+                                marginTop: 3,
                             }}
                         >
                             Loading ...
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            fontWeight="bold"
+                            textAlign="center"
+                            sx={{
+                                marginBottom: 3,
+                            }}
+                        >
+                            Loading can take up to 1 minute, relax
                         </Typography>
                         <CircularProgress
                             size={80}
