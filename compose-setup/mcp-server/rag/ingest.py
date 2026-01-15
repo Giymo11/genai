@@ -13,9 +13,6 @@ logger = logging.getLogger(__name__)
 
 def recipe_to_text(r: dict) -> str:
     logger.info("Converting recipe to text format")
-    # ingredients_text = ", ".join(
-    #     f"{i['amount']}ml {i['ingredient']}" for i in r.get("ingredients", [])
-    # )
     ingredients_text = ", ".join(
         f"{i.get('volume_ml', '?')}ml {i.get('name', '?')} ({i.get('taxonomy','')})" 
         for i in r.get("ingredients", [])
@@ -47,7 +44,7 @@ def ingest(file_path: str):
         if "cocktail_specs" in data:
             recipes = data["cocktail_specs"]
         else:
-            recipes = [data]  # fallback single recipe dict
+            recipes = [data]
     elif isinstance(data, list):
         recipes = data
     else:
@@ -72,13 +69,9 @@ def ingest(file_path: str):
                 "name": recipe.get("name", ""),
                 "method": recipe.get("method", ""),
                 "description": recipe.get("description", ""),
-                # "tags": ", ".join(recipe.get("tags", [])),
                 "serve": recipe.get("serve", "")
             }]
         )
         count += 1
-        
-    #     del texts, embeddings
-    #     gc.collect()
 
     print(f"Ingested {count} recipes into ChromaDB")
