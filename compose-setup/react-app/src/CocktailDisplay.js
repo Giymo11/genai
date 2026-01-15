@@ -2,9 +2,11 @@ import * as React from 'react';
 import Box from "@mui/material/Box";
 import CocktailImage from "./sex-on-the-beach-default.jpg";
 import { useCocktail } from "../src/context/CocktailProvider";
+import CircularProgress from '@mui/material/CircularProgress';
+import {Typography} from "@mui/material";
 
 export default function CocktailDisplay() {
-    const { cocktailName, cocktailDescription, selectedCategories } = useCocktail();
+    const { llmResponse, loading, error} = useCocktail();
     return (
         <Box
             sx={{
@@ -20,31 +22,51 @@ export default function CocktailDisplay() {
                 justifyContent: "space-evenly",
             }}
         >
-            <Box>
-                <h2>{ cocktailName }</h2>
-                <h3>{ cocktailDescription }</h3>
-            </Box>
             <Box
                 xs={{
-                    width: "75%",
+                    width: "50%",
                 }}
             >
-                <img
-                    style={{ width: "75%", display: "block", margin: "auto" }}
-                    src={CocktailImage}
-                    alt="Cocktail"
-                />
+                { loading ? (
+                    <Box sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        flexDirection: "column",
+                        my: 5
+                    }}>
+                        <Typography
+                            variant="subtitle1"
+                            fontWeight="bold"
+                            textAlign="center"
+                            sx={{
+                                my: 3,
+                            }}
+                        >
+                            Loading ...
+                        </Typography>
+                        <CircularProgress
+                            size={80}
+                        />
+                    </Box>
+                ):(
+                    <img
+                        style={{ width: "50%", display: "block", margin: "auto" }}
+                        src={CocktailImage}
+                        alt="Cocktail"
+                    />
+                ) }
             </Box>
-            <Box>//info: ingredients usually: 2-8; check rest_api.pyt
-                <b>Ingredients:</b>
-                <ul>
-                    <li>60 oz whiskey</li>
-                    <li>20g sugar</li>
-                    <li>20g sugar</li>
-                    <li>20g sugar</li>
-                    <li>20g sugar</li>
-                </ul>
-            </Box>
+            { llmResponse && (
+                <div>
+                    <u>Here is your cocktail:</u>
+                    <div
+                        className="llm-response"
+                        dangerouslySetInnerHTML={{ __html: llmResponse }}
+                    />
+                </div>
+            )}
+            { error && (<h3>An Error occured!</h3>)}
+
         </Box>
     );
 }

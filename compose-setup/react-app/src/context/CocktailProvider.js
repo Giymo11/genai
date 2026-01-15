@@ -11,6 +11,7 @@ export function CocktailProvider({ children }) {
     const [inputTextField, setInputTextField] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null); // user-facing message
+    const [llmResponse, setLlmResponse] = useState("");
 
     const [cocktailName, setCocktailName] = useState("No cocktail searched yet");
     const [cocktailDescription, setCocktailDescription] = useState("No cocktail searched yet");
@@ -18,39 +19,18 @@ export function CocktailProvider({ children }) {
     const clearError = () => setError(null);
 
     const searchCocktail = async () => {
+        setLlmResponse(null);
         setLoading(true);
         setError(null);
-        setTimeout(() => {
-            console.log("Test for testing loading spinner");
-            setLoading(false);
-        }, 3000);
-
-        /*try {
-            const result = await fetchCocktailByCategories(selectedCategories);
-
-            // Keep previous name/description until the next fetch succeeds (your requirement).
-            setCocktailName(result?.name ?? "");
-            setCocktailDescription(result?.description ?? "");
-        } catch (e) {
-            // Keep previous cocktailName/cocktailDescription on error (also matches your requirement).
-            const message =
-                typeof e?.message === "string" && e.message.trim().length > 0
-                    ? e.message
-                    : "Something went wrong while fetching a cocktail.";
-            setError(message);
-        } finally {
-            setLoading(false);
-        }*/
 
         try {
-            const result = await fetchHello();
-
-            // Keep previous name/description until the next fetch succeeds (your requirement).
-            setCocktailName(result?.name ?? "");
-            setCocktailDescription(result?.description ?? "");
-            console.log(result);
-            console.log(result.message);
-            console.log(result.status);
+            if (inputTextField.length === 0 || inputTextField === " "){
+                setInputTextField("No categories selected");
+            }
+            const result = await fetchCocktailByCategories(inputTextField, Array.from(selectedCategories));
+            const rawResponse = result.response;
+            const cleanResponse = rawResponse.replaceAll("\n", "");
+            setLlmResponse(cleanResponse);
         } catch (e) {
             // Keep previous cocktailName/cocktailDescription on error (also matches your requirement).
             const message =
@@ -61,11 +41,6 @@ export function CocktailProvider({ children }) {
         } finally {
             setLoading(false);
         }
-
-
-        setCocktailName("Whiskey Sour");
-        setCocktailDescription("Lorem ipsum");
-
     };
 
     const value = useMemo(
@@ -77,6 +52,7 @@ export function CocktailProvider({ children }) {
             error,
             cocktailName,
             cocktailDescription,
+            llmResponse,
 
             // actions (make methods public)
             setSelectedCategories,
@@ -84,6 +60,7 @@ export function CocktailProvider({ children }) {
             setLoading,
             searchCocktail,
             clearError,
+            setLlmResponse,
         }),
         [
             availableCategories,
@@ -93,6 +70,7 @@ export function CocktailProvider({ children }) {
             error,
             cocktailName,
             cocktailDescription,
+            llmResponse,
         ]
     );
 

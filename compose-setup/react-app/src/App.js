@@ -46,8 +46,9 @@ function App() {
                         }}
                     >
                         <h1>
-                            //TODO insert real text (Instructions here!)
+                            Welcome to the smartes cocktail mixer
                         </h1>
+                        <h2>Add your wishes below and get excited about your Cockt<b>AI</b>l</h2>
                     </Box>
                     <Box>
                         <AvailableCategories />
@@ -56,6 +57,7 @@ function App() {
                         <SendRequestButton />
                     </Box>
                 </Box>
+
 
                 {/* Right Section */}
                 <Box
